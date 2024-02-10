@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\SppController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::view('/master', 'template.master');
+Route::view('/create', 'create');
+
+// Route Untuk mengelola GenreController
+Route::controller(SppController::class)->group(function () {
+    Route::get('/spp', 'index')->name('spp.index');
+    Route::get('/spp/create', 'create')->name('spp.create');
+    Route::post('/spp', 'store')->name('spp.store');
+    Route::get('/spp/{id}/edit', 'edit')->name('spp.edit');
+    Route::PUT('/spp/{id}', 'update')->name('spp.update');
+    Route::delete('/spp/{id}', 'destroy')->name('spp.destroy');
+
+});
+
+
